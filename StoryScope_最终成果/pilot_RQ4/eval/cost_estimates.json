@@ -1,0 +1,275 @@
+{
+  "assumptions": {
+    "note": "以下为按公开定价量级估算的模拟成本，非真实API usage字段返回值；本pilot为人工模拟三种策略，未发生真实多模型API调用。",
+    "tokens_per_char": 1.8,
+    "pricing_usd_per_1M_tokens": {
+      "strong": {
+        "input": 3.0,
+        "output": 15.0
+      },
+      "cheap": {
+        "input": 0.15,
+        "output": 0.6
+      },
+      "judge": {
+        "input": 0.5,
+        "output": 2.0
+      }
+    },
+    "context_chars_ground_truth": 3139,
+    "drafter_prompt_overhead_chars": 600,
+    "revise_context_subset_chars": 1600,
+    "revise_prompt_overhead_chars": 500,
+    "checker_context_subset_chars": 1600,
+    "checker_prompt_overhead_chars": 900,
+    "draft_ratio_assumption": {
+      "A": 0.88,
+      "B": 0.82
+    },
+    "checker_output_chars_per_call": {
+      "A": 150,
+      "B": 280,
+      "C": 280
+    },
+    "pipeline_order": "Drafter生成草稿 -> Consistency Checker + Narratology Checker检查草稿 -> Reviser结合issue生成final_text（复用研究方案2.2节pipeline）"
+  },
+  "strategies": {
+    "strategy_A_allstrong": {
+      "chapters": {
+        "ch1": {
+          "drafter_call": {
+            "input_chars": 3739,
+            "output_chars": 1161,
+            "input_tokens_est": 6730.2,
+            "output_tokens_est": 2089.8,
+            "tier": "strong",
+            "cost_usd": 0.051538
+          },
+          "consistency_checker_call": {
+            "input_chars": 3661,
+            "output_chars": 150,
+            "input_tokens_est": 6589.8,
+            "output_tokens_est": 270.0,
+            "tier": "judge",
+            "cost_usd": 0.003835
+          },
+          "narratology_checker_call": {
+            "input_chars": 3661,
+            "output_chars": 150,
+            "input_tokens_est": 6589.8,
+            "output_tokens_est": 270.0,
+            "tier": "judge",
+            "cost_usd": 0.003835
+          },
+          "reviser_call": {
+            "input_chars": 3561,
+            "output_chars": 1319,
+            "input_tokens_est": 6409.8,
+            "output_tokens_est": 2374.2,
+            "tier": "strong",
+            "cost_usd": 0.054842
+          }
+        },
+        "ch2": {
+          "drafter_call": {
+            "input_chars": 3739,
+            "output_chars": 1011,
+            "input_tokens_est": 6730.2,
+            "output_tokens_est": 1819.8,
+            "tier": "strong",
+            "cost_usd": 0.047488
+          },
+          "consistency_checker_call": {
+            "input_chars": 3511,
+            "output_chars": 150,
+            "input_tokens_est": 6319.8,
+            "output_tokens_est": 270.0,
+            "tier": "judge",
+            "cost_usd": 0.0037
+          },
+          "narratology_checker_call": {
+            "input_chars": 3511,
+            "output_chars": 150,
+            "input_tokens_est": 6319.8,
+            "output_tokens_est": 270.0,
+            "tier": "judge",
+            "cost_usd": 0.0037
+          },
+          "reviser_call": {
+            "input_chars": 3411,
+            "output_chars": 1149,
+            "input_tokens_est": 6139.8,
+            "output_tokens_est": 2068.2,
+            "tier": "strong",
+            "cost_usd": 0.049442
+          }
+        }
+      },
+      "summary": {
+        "total_cost_usd": 0.21838,
+        "drafter_cost_usd": 0.099026,
+        "reviser_cost_usd": 0.104284,
+        "checker_cost_usd": 0.01507,
+        "checker_pct_of_total": 6.9
+      }
+    },
+    "strategy_B_allcheap": {
+      "chapters": {
+        "ch1": {
+          "drafter_call": {
+            "input_chars": 3739,
+            "output_chars": 427,
+            "input_tokens_est": 6730.2,
+            "output_tokens_est": 768.6,
+            "tier": "cheap",
+            "cost_usd": 0.001471
+          },
+          "consistency_checker_call": {
+            "input_chars": 2927,
+            "output_chars": 280,
+            "input_tokens_est": 5268.6,
+            "output_tokens_est": 504.0,
+            "tier": "judge",
+            "cost_usd": 0.003642
+          },
+          "narratology_checker_call": {
+            "input_chars": 2927,
+            "output_chars": 280,
+            "input_tokens_est": 5268.6,
+            "output_tokens_est": 504.0,
+            "tier": "judge",
+            "cost_usd": 0.003642
+          },
+          "reviser_call": {
+            "input_chars": 3087,
+            "output_chars": 521,
+            "input_tokens_est": 5556.6,
+            "output_tokens_est": 937.8,
+            "tier": "cheap",
+            "cost_usd": 0.001396
+          }
+        },
+        "ch2": {
+          "drafter_call": {
+            "input_chars": 3739,
+            "output_chars": 297,
+            "input_tokens_est": 6730.2,
+            "output_tokens_est": 534.6,
+            "tier": "cheap",
+            "cost_usd": 0.00133
+          },
+          "consistency_checker_call": {
+            "input_chars": 2797,
+            "output_chars": 280,
+            "input_tokens_est": 5034.6,
+            "output_tokens_est": 504.0,
+            "tier": "judge",
+            "cost_usd": 0.003525
+          },
+          "narratology_checker_call": {
+            "input_chars": 2797,
+            "output_chars": 280,
+            "input_tokens_est": 5034.6,
+            "output_tokens_est": 504.0,
+            "tier": "judge",
+            "cost_usd": 0.003525
+          },
+          "reviser_call": {
+            "input_chars": 2957,
+            "output_chars": 362,
+            "input_tokens_est": 5322.6,
+            "output_tokens_est": 651.6,
+            "tier": "cheap",
+            "cost_usd": 0.001189
+          }
+        }
+      },
+      "summary": {
+        "total_cost_usd": 0.01972,
+        "drafter_cost_usd": 0.002801,
+        "reviser_cost_usd": 0.002585,
+        "checker_cost_usd": 0.014334,
+        "checker_pct_of_total": 72.69
+      }
+    },
+    "strategy_C_router": {
+      "chapters": {
+        "ch1": {
+          "drafter_call": {
+            "input_chars": 3739,
+            "output_chars": 378,
+            "input_tokens_est": 6730.2,
+            "output_tokens_est": 680.4,
+            "tier": "cheap",
+            "cost_usd": 0.001418
+          },
+          "consistency_checker_call": {
+            "input_chars": 2878,
+            "output_chars": 280,
+            "input_tokens_est": 5180.4,
+            "output_tokens_est": 504.0,
+            "tier": "judge",
+            "cost_usd": 0.003598
+          },
+          "narratology_checker_call": {
+            "input_chars": 2878,
+            "output_chars": 280,
+            "input_tokens_est": 5180.4,
+            "output_tokens_est": 504.0,
+            "tier": "judge",
+            "cost_usd": 0.003598
+          },
+          "reviser_call": {
+            "input_chars": 3038,
+            "output_chars": 1070,
+            "input_tokens_est": 5468.4,
+            "output_tokens_est": 1926.0,
+            "tier": "strong",
+            "cost_usd": 0.045295
+          }
+        },
+        "ch2": {
+          "drafter_call": {
+            "input_chars": 3739,
+            "output_chars": 362,
+            "input_tokens_est": 6730.2,
+            "output_tokens_est": 651.6,
+            "tier": "cheap",
+            "cost_usd": 0.0014
+          },
+          "consistency_checker_call": {
+            "input_chars": 2862,
+            "output_chars": 280,
+            "input_tokens_est": 5151.6,
+            "output_tokens_est": 504.0,
+            "tier": "judge",
+            "cost_usd": 0.003584
+          },
+          "narratology_checker_call": {
+            "input_chars": 2862,
+            "output_chars": 280,
+            "input_tokens_est": 5151.6,
+            "output_tokens_est": 504.0,
+            "tier": "judge",
+            "cost_usd": 0.003584
+          },
+          "reviser_call": {
+            "input_chars": 3022,
+            "output_chars": 788,
+            "input_tokens_est": 5439.6,
+            "output_tokens_est": 1418.4,
+            "tier": "strong",
+            "cost_usd": 0.037595
+          }
+        }
+      },
+      "summary": {
+        "total_cost_usd": 0.100072,
+        "drafter_cost_usd": 0.002818,
+        "reviser_cost_usd": 0.08289,
+        "checker_cost_usd": 0.014364,
+        "checker_pct_of_total": 14.35
+      }
+    }
+  }
+}

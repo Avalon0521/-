@@ -1,0 +1,59 @@
+{
+  "condition": "A_fullcontext",
+  "note": "人工评分代替LLM-judge，用于验证RQ1指标体系（世界观违规数/角色OOC次数/伏笔遗漏率）是否可测；6章pilot规模，非最终结果",
+  "per_chapter": [
+    {
+      "chapter": 1,
+      "world_rule_violations": 0,
+      "character_ooc": 0,
+      "chekhov_guns_touched": ["G1_怀表"],
+      "notes": "怀表自然出现，符号未识别，符合大纲。額外提前透露'姐姐失踪地点与钟表铺同一片区'，比大纲预定的第3章更早揭示——属于叙事节奏提前而非硬性一致性错误。"
+    },
+    {
+      "chapter": 2,
+      "world_rule_violations": 0,
+      "character_ooc": 0,
+      "chekhov_guns_touched": ["G2_老照片", "G3_旧钥匙"],
+      "notes": "周伯耳背设定执行正确（提高声音/凑近说话）。陆行舟称呼'知微'，未违反禁用'沈队'红线。旧钥匙自然露出，符合大纲。老照片被提及但未深入。"
+    },
+    {
+      "chapter": 3,
+      "world_rule_violations": 0,
+      "character_ooc": 0,
+      "chekhov_guns_touched": ["G1_怀表"],
+      "notes": "明确写出'她再没碰过一滴酒...茶是唯一能让她清醒着熬夜的东西'，正确呼应沈知微不喝酒红线且未写成随意习惯反转，处理很好。陆行舟称呼'知微'保持一致。怀表符号与写生本涂鸦符号relate，伏笔延续。"
+    },
+    {
+      "chapter": 4,
+      "world_rule_violations": 0,
+      "character_ooc": 0,
+      "chekhov_guns_touched": [],
+      "notes": "周伯耳背设定持续保持一致（'凑近柜台，提高声音'）。收藏家线索透露但未提前剧透任何可辨认外貌/口癖细节，符合红线。"
+    },
+    {
+      "chapter": 5,
+      "world_rule_violations": 0,
+      "character_ooc": 0,
+      "chekhov_guns_touched": ["G3_旧钥匙"],
+      "notes": "G3钥匙解决：钥匙打开老宅，符合大纲结构（两人共同发现）。发现姐姐十年前失踪当晚的发夹，将新旧案件强关联，是全篇张力最高点。陆行舟自称钥匙来自其父亲（退休老片警），这是drafter在未被告知真实谜底（原计划是他从旧盗窃案证物中私自留下）情况下的自创解释——不构成红线违反（未表现为随意动用警局资源，反而是私人物品/父辈遗留），但与作者预设谜底不同，说明drafter在无ground truth情况下会自行编造合理但偏离原'谜底'的解释。"
+    },
+    {
+      "chapter": 6,
+      "world_rule_violations": 0,
+      "character_ooc": 0,
+      "chekhov_guns_touched": ["G1_怀表"],
+      "notes": "沈知微将怀表符号与发夹、画笔痕迹对比呼应，是G1的部分推进，但未达到大纲要求的'确认收藏家身份线索'（未给出明确结论，只是'还没想通'）。G2老照片自ch2引入后，ch3-ch6全部未再提及——伏笔遗漏（本章大纲要求'结合周伯照片确认收藏家身份线索'，但照片完全未出现）。"
+    }
+  ],
+  "aggregate": {
+    "world_rule_violation_count": 0,
+    "character_ooc_count": 0,
+    "chekhov_gun_outcomes": {
+      "G1_怀表": "部分推进（ch1/ch3/ch6三次touch），未达成大纲要求的最终确认，判定为'部分遗漏'",
+      "G2_老照片": "ch2引入后完全未再出现，判定为'完全遗漏'（1/3伏笔完全丢失）",
+      "G3_旧钥匙": "ch2引入、ch5正确解决，判定为'完全解决'（含drafter自创但不违反红线的细节偏离）"
+    },
+    "foreshadowing_miss_rate": "1/3 完全遗漏 + 1/3 部分遗漏 = 有效伏笔遗漏率约33%-67%（视是否将'部分推进未confirm'计入遗漏）",
+    "avg_chapter_length_chars": 1487
+  }
+}

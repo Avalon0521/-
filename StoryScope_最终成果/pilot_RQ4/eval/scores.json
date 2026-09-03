@@ -1,0 +1,105 @@
+{
+  "note": "人工评分代替LLM-judge，用于验证RQ4指标体系（世界观违规数/角色OOC次数/伏笔处理/叙事质量主观分）在三种生成策略下是否可测；2章pilot规模，非最终结果。评分对象为每种策略的最终交付文本（strategy_A_allstrong/ch1-2.txt；strategy_B_allcheap/ch1-2.txt；strategy_C_router的final_after_strong_revise.txt，draft_by_cheap.txt仅作参考不计入最终评分）。",
+  "strategy_A_allstrong": {
+    "condition": "全程强模型drafter + 统一1轮强模型reviser修正",
+    "per_chapter": [
+      {
+        "chapter": 1,
+        "world_rule_violations": 0,
+        "character_ooc": 0,
+        "chekhov_guns_touched": ["G1_老底片", "G2_相纸型号线索"],
+        "notes": "G1底片引入自然（怀表夹层发现过程有细节铺垫，如镊子撬开、发脆的胶片质感）。G2相纸型号线索引入到位（顾师傅指出齐口方式、纸基厚度等专业细节，停产二十年）。暗房时限规则被正面强调且未被违反（'我说三个钟头,就是三个钟头'）。不喝酒红线处理干净：买热水而非酒，配合十年前失延误报警的心理独白，无擦边风险。"
+      },
+      {
+        "chapter": 2,
+        "world_rule_violations": 0,
+        "character_ooc": 0,
+        "chekhov_guns_touched": ["G1_老底片", "G2_相纸型号线索"],
+        "notes": "G1按计划完成部分解决：照片呈现老宅局部+背影人影，未提前泄露身份细节，符合红线。G2按计划完成留悬念式解决：顾师傅明确'这三十年就卖过一次'，附加'总戴手套怕伤手'这一具体细节，为后续弧段埋下可用线索但未过度剧透。顾师傅职业保密习惯与暗房时限规则均未被违反。叙事上有额外的心理层次（如'她能看出顾守成不是在敷衍……或者说,这么多年过去,他也没把这件小事放在心上过'的双重解释），细节密度高。"
+      }
+    ],
+    "aggregate": {
+      "world_rule_violation_count": 0,
+      "character_ooc_count": 0,
+      "chekhov_gun_outcomes": {
+        "G1_老底片": "完全按计划部分解决（未揭示身份，符合本弧段收尾要求）",
+        "G2_相纸型号线索": "完全按计划留悬念式解决，且附加细节（手套怕伤手）"
+      },
+      "narrative_quality_subjective_1to5": 5,
+      "narrative_quality_notes": "细节丰富（暗房工艺质感、人物心理独白、场景氛围），红线遵守干净，伏笔埋设自然且有余量供后续弧段回收，是三种策略中的质量上限参照。",
+      "avg_chapter_length_chars": 1234
+    }
+  },
+  "strategy_B_allcheap": {
+    "condition": "全程廉价模型drafter + 统一1轮廉价模型reviser修正",
+    "per_chapter": [
+      {
+        "chapter": 1,
+        "world_rule_violations": 0,
+        "character_ooc": 0,
+        "red_line_edge_case_count": 1,
+        "chekhov_guns_touched": ["G1_老底片", "G2_相纸型号线索"],
+        "notes": "G1/G2均有引入但描写骨架化（'撬开一看，里面卷着一小段旧底片'，无镊子/发脆质感等细节；顾师傅对相纸的判断只有一句'好像是很老的型号'，缺少A中的齐口方式/纸基厚度等专业细节，属于'描写更简略'的典型廉价模型模式）。不喝酒红线出现1处轻微擦边：'手都伸到摊子跟前了,闻着那股热气,犹豫了两三秒,才把手收回来'——这不构成完整OOC（她最终仍拒绝），但比A的处理方式明显更接近'差一点点'的边界模糊，判定为红线edge case而非违规，计入character_ooc之外单独统计。"
+      },
+      {
+        "chapter": 2,
+        "world_rule_violations": 0,
+        "character_ooc": 0,
+        "red_line_edge_case_count": 0,
+        "chekhov_guns_touched": ["G1_老底片", "G2_相纸型号线索"],
+        "notes": "G1部分解决但描写单薄（仅'能看出是一处老房子,还有一个人的背影,看不清脸'，缺少A中门廊/雕花窗格/阴影切割构图等具体意象）。G2解决但丢失了A/C都保留的'总戴着手套,说是怕显影液伤手'细节——这是本策略典型的'伏笔埋设生硬或遗漏'模式：不是完全遗漏伏笔本身（核心线索'卖给过一个不开照相馆的私人客户'仍在），而是遗漏了支撑该伏笔在后续弧段被回收所需的具体质感细节，属于'骨架化'损耗而非结构性缺失。暗房时限规则未被违反（本章未重提，属于处理方式简化而非违规）。"
+      }
+    ],
+    "aggregate": {
+      "world_rule_violation_count": 0,
+      "character_ooc_count": 0,
+      "red_line_edge_case_count": 1,
+      "chekhov_gun_outcomes": {
+        "G1_老底片": "部分解决但描写骨架化，具体意象（门廊/窗格/阴影构图）缺失",
+        "G2_相纸型号线索": "核心线索保留但支撑细节（手套怕伤手）遗漏，判定为'伏笔埋设生硬'"
+      },
+      "narrative_quality_subjective_1to5": 2,
+      "narrative_quality_notes": "整体呈现典型廉价模型模式：叙述多于描写（'她很惊讶'代替具体心理刻画）、对话推动剧情但缺乏氛围铺垫、专业细节（暗房工艺/相纸质感）大幅简化。未出现严重红线违规，但出现1处酒精红线的边界模糊场景，是'差一点点'而非'明显违规'的真实API典型误差模式。",
+      "avg_chapter_length_chars": 442
+    }
+  },
+  "strategy_C_router": {
+    "condition": "廉价drafter生成草稿 + 强reviser统一1轮修正（评分对象为final_after_strong_revise.txt；draft_by_cheap.txt仅作对照参考）",
+    "draft_reference_notes": "两章草稿（draft_by_cheap.txt）质量与strategy_B的骨架化模式高度同质（同为廉价模型典型弱点：描写简略、专业细节缺失），ch1草稿的酒精场景处理反而比B的对应草稿更干净（'摇了摇头没有接,走开了'，无B式的手伸向摊子的犹豫细节）——说明廉价drafter的具体输出存在样本间随机性，不能简单等同于B的每一处弱点都会复现，这也是路由策略下'强reviser介入点'具体位置会因草稿具体内容而略有不同的真实情况。",
+    "per_chapter": [
+      {
+        "chapter": 1,
+        "world_rule_violations": 0,
+        "character_ooc": 0,
+        "chekhov_guns_touched": ["G1_老底片", "G2_相纸型号线索"],
+        "notes": "强reviser介入后,G1/G2的专业细节（齐口方式/纸基厚度/三个钟头不能少）与A几乎等量恢复,不喝酒红线处理干净（无擦边）。与A相比,整体行文结构与A高度相似（因为reviser显然是在draft基础上大幅改写而非从零重写,句式节奏与A的重合度很高,这是路由策略'纠正'而非'原生生成'的可见痕迹,但本章尚未表现出明显的质量损耗）。"
+      },
+      {
+        "chapter": 2,
+        "world_rule_violations": 0,
+        "character_ooc": 0,
+        "chekhov_guns_touched": ["G1_老底片", "G2_相纸型号线索"],
+        "notes": "G1/G2均按计划解决,手套细节保留,与A的核心信息量一致。但本章长度（788字）明显短于A对应章节（1149字，约短31%）,具体损耗体现在心理独白层被压缩：对比A原句'她能看出顾守成不是在敷衍——一个愿意花三个钟头一分不差地按老规矩冲一张陌生底片的人,不像是会轻易说谎的性格,他只是真的记不清了,或者说,这么多年过去,他也没把这件小事放在心上过。'，C最终版对应处压缩为'她能看出顾守成不是在敷衍,只是真的记不清了。'——保留了核心判断但丢失了支撑判断的双重解释层,是reviser在draft的经济化叙事骨架上做'加固式修订'而非'重新构思式生成'留下的结构性痕迹，属于路由策略的真实局限而非严重缺陷。"
+      }
+    ],
+    "aggregate": {
+      "world_rule_violation_count": 0,
+      "character_ooc_count": 0,
+      "chekhov_gun_outcomes": {
+        "G1_老底片": "完全按计划部分解决,细节密度接近A",
+        "G2_相纸型号线索": "完全按计划留悬念式解决,含手套细节,与A等量"
+      },
+      "narrative_quality_subjective_1to5": 4,
+      "narrative_quality_notes": "红线遵守与A同等干净,伏笔核心信息完整度与A几乎相同,但心理独白/解释层的丰富度不及A,且ch2篇幅明显短于A同章（可能是reviser在draft骨架上做保守式扩写而非充分重构所致），整体判定为'接近但略逊于全强模型'，与研究方案预期的路由策略局限相符。",
+      "avg_chapter_length_chars": 929
+    }
+  },
+  "cross_strategy_comparison": {
+    "world_rule_violation_count": {"A": 0, "B": 0, "C": 0},
+    "character_ooc_count": {"A": 0, "B": 0, "C": 0},
+    "red_line_edge_case_count": {"A": 0, "B": 1, "C": 0},
+    "narrative_quality_subjective_1to5": {"A": 5, "B": 2, "C": 4},
+    "avg_chapter_length_chars": {"A": 1234, "B": 442, "C": 929},
+    "summary_note": "三种策略均未出现硬性世界观违规或角色OOC，差异主要体现在描写密度、专业细节完整度、心理独白层次，以及B策略特有的1处红线擦边（酒精场景犹豫细节）。C（路由）在核心伏笔信息完整度上追平A，但叙事细节丰富度与篇幅均低于A、高于B，是三者中间态，与研究方案对'路由策略应接近但可能仍略逊于全强模型'的预期一致。"
+  }
+}
